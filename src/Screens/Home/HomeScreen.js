@@ -1,36 +1,18 @@
 import React, { Component, useEffect, useState } from "react";
-import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
-  Text,
-  Body,
-  Item,
-  Icon,
-  Input,
-} from "native-base";
+import { Container, Header, Content,Card,CardItem,Text,Body,Item,Icon,Input,AppRegistry,Image} from "native-base";
 import { firebase, db } from "../../../src/firebase/config.js";
 import { ScrolView, View, StyleSheet, TextInput } from "react-native";
 // import { Card } from "@paraboly/react-native-card";
-{
-  /* <Content>
-        <Card>
-          <CardItem header>
-            <Text>Recipe Name</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>Breif description of recipe</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer>
-            <Text>comment</Text>
-          </CardItem>
-        </Card>
-      </Content> */
-}
+import {styles} from './styles.js';
+
+const test_data = [{
+  recipeName: "Celery",
+  img: 'https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_1280.jpg',
+  description: "Very very crunchy",
+  ingredients:{"name":{"mg": 5}},
+  instructions:["Add water", " put in soil", "grow"]
+}]
+
 export default function HomeScreen() {
   // const x = db
   //   .collection("Recipe")
@@ -48,7 +30,11 @@ export default function HomeScreen() {
       return data;
     });
   }
-  console.log(fetchdata)
+
+  // number of results
+  let current = -1
+  let result = 3
+
   // const RecCol = db
   //   .collection("Recipe")
   //   .get()
@@ -57,33 +43,34 @@ export default function HomeScreen() {
   //     console.log(data);
   //   });
 
-  function card() {
-    return pass;
-  }
+  // scroll end?
   useEffect(() => {});
+  const renderNext = () => {
+    current++;
+    return (
+      <Card>
+        <CardItem header button onPress={() => {
+          // TODO: nav to item uid
+          alert("Accessing " + test_data[current].recipeName)
+        }}>
+          {/* <Image source={{uri: test_data[current].img}} style={styles.image} /> */}
+          <Text style={styles.title}>{test_data[current].recipeName+ ': '}</Text>
+          <Text>{test_data[current].description}</Text>
+        </CardItem>
+      </Card>
+    )
+  }
   return (
     <Container>
-      <Header searchBar>
-        <Item>
-          <Icon name="ios-search" />
-          <Input placeholder="Find yummy foods" />
-        </Item>
-      </Header>
-      <Content padder>
-        <Card>
-          <CardItem header button onPress={() => alert("This is Card Header")}>
-            <Text>NativeBase</Text>
-          </CardItem>
-          <CardItem button onPress={() => alert("This is Card Body")}>
-            <Body>
-              <Text>Click on any carditem</Text>
-            </Body>
-          </CardItem>
-          <CardItem footer button onPress={() => alert("This is Card Footer")}>
-            <Text>GeekyAnts</Text>
-          </CardItem>
-        </Card>
-      </Content>
+    <Header searchBar>
+      <Item>
+        <Icon name="ios-search" />
+        <Input placeholder="Find yummy foods" />
+      </Item>
+    </Header>
+    <Content padder>
+      {renderNext()}
+    </Content>
     </Container>
   );
 }
