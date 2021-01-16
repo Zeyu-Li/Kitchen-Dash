@@ -4,7 +4,7 @@ import { Settings } from './tabs/Settings'
 import { Home } from './tabs/Home'
 import { Favourites } from './tabs/Favourites'
 import { Search } from './tabs/Search'
-
+import {Login} from './components/Login'
 const BTabs = createBottomTabNavigator();
 
 export const Routes = ({ }) => {
