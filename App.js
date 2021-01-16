@@ -9,12 +9,14 @@ import {Login} from './src/routes/tabs/Login.js'
 
 const LoginAuth = createStackNavigator();
 
+import Login from './src/routes/components/Login'
+
 export default function App() {
   return (
     <NavigationContainer>
-      <LoginAuth.Navigator initialRouteName='Login' screenOptions={{}} headerMode='none'>
-        <LoginAuth.Screen name="Login" component={Login} />
-        <LoginAuth.Screen name='App' component={Routes} />
+      <LoginAuth.Navigator initialRouteName='Login'>
+      <LoginAuth.Screen name = "Login" component={Login} />
+
       </LoginAuth.Navigator>
     </NavigationContainer>
   );

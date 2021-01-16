@@ -12,4 +12,5 @@ web-build/
 *.vscode
 # macOS
 .DS_Store
-*.ai
+img/preview.ai
+

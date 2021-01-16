@@ -5,14 +5,7 @@ import { Settings } from './tabs/Settings'
 import { Home } from './tabs/Home'
 import { Favourites } from './tabs/Favourites'
 import { Search } from './tabs/Search'
-import { Login } from './tabs/Login'
-
-// icon imgs
-import home from './../../img/home.png'
-import star from './../../img/star.png'
-import setting from './../../img/setting.png'
-
-// import Ionicons from 'react-native-vector-icons/Ionicons';
+import {Login} from './components/Login'
 
 const BTabs = createBottomTabNavigator();
 
