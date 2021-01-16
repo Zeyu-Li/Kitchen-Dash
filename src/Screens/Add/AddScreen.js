@@ -6,17 +6,23 @@ import styles from "./styles.js";
 import DropDownPicker from "react-native-dropdown-picker";
 
 export default function Add() {
-  const RecCol = db.collection("Recipe");
+  const RecCol = db.collection("Recipe"); // ref to the collection in firbase
+
+  // hooks to build the object to be stored
   const [RecipeName, SetRecipeName] = useState("");
   const [Description, SetDescription] = useState("");
   const [Instructions, SetInstruction] = useState("");
   const ingredientList = [];
+
+  // add the object to firebase
   const onAddButtonPress = () => {
     const data = { user:"afaq@yahoo.com",name: RecipeName, desc: Description, instruc: Instructions };
     RecCol.add(data);
   };
+
   // col.add({name: "Afaq Nabi" , address: "102"});
   return (
+    // Form 
     <View style={styles.formContainer}>
       <TextInput
         placeholder="Give your recipe a Name"
