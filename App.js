@@ -1,12 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
-import {styles} from './styles/Style.js';
+import { StyleSheet, View, Text, Button } from 'react-native';
+import { styles } from './styles/Style.js';
 import React from 'react';
 import { Routes } from './src/routes/Routes'
-import { View, Text, Button } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from "@react-navigation/native"
 import react from 'react';
-
 const LoginAuth = createStackNavigator();
 export default function App() {
   return (
