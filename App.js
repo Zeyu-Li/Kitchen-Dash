@@ -5,7 +5,9 @@ import { Routes } from './src/routes/Routes'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from "@react-navigation/native"
 import react from 'react';
+
 const LoginAuth = createStackNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -28,11 +30,3 @@ function testLogin({ navigation }) {
     </View>
   )
 }
-//const styles = StyleSheet.create({
-//  container: {
-//    flex: 1,
-//    backgroundColor: '#fff',
-//    alignItems: 'center',
-//    justifyContent: 'center',
-//  },
-//});
