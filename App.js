@@ -1,9 +1,4 @@
-import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
-import { styles } from './styles/Style.js';
-import { Routes } from './src/routes/Routes'
-import { createStackNavigator } from '@react-navigation/stack'
-import { NavigationContainer } from "@react-navigation/native"
+import { Routes } from './src/Routes.js';
 
 import {Login} from './src/routes/tabs/Login.js'
 
