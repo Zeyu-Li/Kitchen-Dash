@@ -39,7 +39,7 @@ const userDoc = db.collection('Users')
   const loginUser = (email, password,navigation) => {
     console.log(email)
     try{
-      firebase.auth().signInWithEmailAndPassword(email, password) // Look at this Ben!!!! this is where I want to connect to home
+      firebase.auth().signInWithEmailAndPassword(email, password).then(() => navigation.navigate('App'))// Look at this Ben!!!! this is where I want to connect to home
       .then(
         userDoc.add({
           email: email

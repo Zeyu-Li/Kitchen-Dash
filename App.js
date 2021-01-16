@@ -13,6 +13,7 @@ export default function App() {
     <NavigationContainer>
       <LoginAuth.Navigator initialRouteName='Login'>
       <LoginAuth.Screen name = "Login" component={Login} />
+      <LoginAuth.Screen name='App' component={Routes} />
       </LoginAuth.Navigator>
     </NavigationContainer>
   );
