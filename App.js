@@ -1,13 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {styles} from './styles/Style.js';
+import React from 'react';
+import { Routes } from './src/routes/Routes'
 
+import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer } from "@react-navigation/native"
+
+const LoginAuth = createStackNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <LoginAuth.Navigator initialRouteName='App'>
+        <LoginAuth.Screen name='App' component={Routes} />
+      </LoginAuth.Navigator>
+    </NavigationContainer>
   );
 }
+
