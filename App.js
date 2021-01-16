@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes } from './routes/Routes'
+import { Routes } from './src/routes/Routes'
 
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from "@react-navigation/native"
