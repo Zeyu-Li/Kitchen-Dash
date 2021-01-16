@@ -4,7 +4,8 @@ import { styles } from './styles/Style.js';
 import { Routes } from './src/routes/Routes'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from "@react-navigation/native"
-import react from 'react';
+
+import {Login} from './src/routes/tabs/Login.js'
 
 const LoginAuth = createStackNavigator();
 
@@ -12,7 +13,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <LoginAuth.Navigator initialRouteName='Login' screenOptions={{}} headerMode='none'>
-        <LoginAuth.Screen name="Login" component={testLogin} />
+        <LoginAuth.Screen name="Login" component={Login} />
         <LoginAuth.Screen name='App' component={Routes} />
       </LoginAuth.Navigator>
     </NavigationContainer>

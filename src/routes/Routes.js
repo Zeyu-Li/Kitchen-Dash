@@ -5,8 +5,9 @@ import { Settings } from './tabs/Settings'
 import { Home } from './tabs/Home'
 import { Favourites } from './tabs/Favourites'
 import { Search } from './tabs/Search'
+import { Login } from './tabs/Login'
 
-// img
+// icon imgs
 import home from './../../img/home.png'
 import star from './../../img/star.png'
 import setting from './../../img/setting.png'
@@ -19,8 +20,10 @@ export const Routes = ({ }) => {
   return (
     <BTabs.Navigator initialRouteName='Home'
       screenOptions={({ route }) => ({
+        // selected icon
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
+          // console.log(focused)
 
           if (route.name === 'Home') {
             return <Image source={home} style={{ width: 30, height: 30 }} />;
@@ -32,7 +35,6 @@ export const Routes = ({ }) => {
 
           // You can return any component that you like here!
           // return <Ionicons name={iconName} size={size} color={color} />;
-          // return <Image source={home} style={{ width: 30, height: 30 }} />;
         },
       })}
       tabBarOptions={{
