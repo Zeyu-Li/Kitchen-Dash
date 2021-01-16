@@ -1,6 +1,6 @@
 # Kitchen Dash
 
-Kitchen Dash for HackED 2021, a 24 hour hackathon (no particular topic)! 
+Kitchen Dash for HackED 2021, a 24 hour hackathon! 
 
 
 
