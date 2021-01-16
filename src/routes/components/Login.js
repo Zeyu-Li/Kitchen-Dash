@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import AppLoading from 'expo-app-loading'
+import AppLoading from 'expo-app-loading';
 import { Container, Header, Label, Title, Form, Item, Input, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
@@ -7,7 +7,6 @@ import * as firebase from 'firebase';
 import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from './Home'
 
 const firebaseConfig = {
     apiKey: "AIzaSyBbbdNwXhLKaDlmQIxoj6Rdx73wQiBPUuA",
@@ -40,7 +39,7 @@ const userDoc = db.collection('Users')
   const loginUser = (email, password,navigation) => {
     console.log(email)
     try{
-      firebase.auth().signInWithEmailAndPassword(email, password).then(() => navigation.navigate('Home')) // Look at this Ben!!!! this is where I want to connect to home
+      firebase.auth().signInWithEmailAndPassword(email, password) // Look at this Ben!!!! this is where I want to connect to home
       .then(
         userDoc.add({
           email: email

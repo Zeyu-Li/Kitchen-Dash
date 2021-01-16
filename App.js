@@ -5,11 +5,14 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from "@react-navigation/native"
 
 const LoginAuth = createStackNavigator();
+
+import Login from './src/routes/components/Login'
+
 export default function App() {
   return (
     <NavigationContainer>
-      <LoginAuth.Navigator initialRouteName='App'>
-        <LoginAuth.Screen name='App' component={Routes} />
+      <LoginAuth.Navigator initialRouteName='Login'>
+      <LoginAuth.Screen name = "Login" component={Login} />
       </LoginAuth.Navigator>
     </NavigationContainer>
   );
