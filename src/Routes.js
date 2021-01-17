@@ -7,6 +7,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Button, Text, View, Image } from "react-native";
 import { Center } from "./Center";
 import { Settings } from "./tabs/Settings";
+import { Item } from "./Screens/Item/Item";
 import HomeScreen from "../src/Screens/Home/HomeScreen.js";
 import FavScreen from "../src/Screens/Favourites/FavScreen.js";
 import Add from "../src/Screens/Add/AddScreen.js";
@@ -80,6 +81,8 @@ const tabNav = ({}) => {
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Add" component={Add} />
+        {/* debug item */}
+        {/* <Tab.Screen name="Favourites" component={Item} /> */}
         <Tab.Screen name="Favourites" component={FavScreen} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
