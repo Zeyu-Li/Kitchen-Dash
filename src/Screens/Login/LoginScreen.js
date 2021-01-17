@@ -23,6 +23,8 @@ import { styles } from "./styles.js";
 
 const userDoc = db.collection("Users");
 const signUpUser = (email, password) => {
+  // strip email
+  email = email.trim();
   try {
     console.log(email,password);
     if (password.length < 6) {
@@ -61,6 +63,8 @@ const signUpUser = (email, password) => {
 };
 
 const loginUser = (email, password, navigation) => {
+  // strip email
+  email = email.trim();
   try {
     firebase
       .auth()
