@@ -1,9 +1,10 @@
 import React, { Component, useEffect, useState } from "react";
-import { Container, Header, Content,Card,CardItem,Text,Body,Item,Icon,Input,AppRegistry,Image} from "native-base";
+import { Container, Header, Content,Card,CardItem,Text,Body,Item,Icon,Input,AppRegistry} from "native-base";
 import { firebase, db } from "../../../src/firebase/config.js";
-import { ScrolView, View, StyleSheet, TextInput } from "react-native";
+import { Image, View, StyleSheet, TextInput } from "react-native";
 // import { Card } from "@paraboly/react-native-card";
 import {styles} from './styles.js';
+// import {renderNext} from './new_card.js';
 
 const test_data = [{
   recipeName: "Celery",
@@ -23,17 +24,32 @@ export default function HomeScreen() {
   //   });
   // x;
   // console.log(x);
-  RecipeRef = db.collection("Recipe").get();
-  function fetchdata() {
-    RecipeRef.then((querySnapshot) => {
-      const data = querySnapshot.docs.map((doc) => doc.data());
-      return data;
-    });
-  }
+  // RecipeRef = db.collection("Recipe").get();
+  // function fetchdata() {
+  //   RecipeRef.then((querySnapshot) => {
+  //     const data = querySnapshot.docs.map((doc) => doc.data());
+  //     return data;
+  //   });
+  // }
 
   // number of results
   let current = -1
   let result = 3
+  const renderNext = (test_data) => {
+    current++;
+    return (
+      <Card>
+        <CardItem header button onPress={() => {
+          // TODO: nav to item uid
+          alert("Accessing " + test_data[current].recipeName)
+        }}>
+          <Image source={{uri: test_data[current].img}} style={styles.image} />
+          <Text style={styles.title}>{test_data[current].recipeName+ ': '}</Text>
+          <Text>{test_data[current].description}</Text>
+        </CardItem>
+      </Card>
+    )
+  }
 
   // const RecCol = db
   //   .collection("Recipe")
@@ -45,21 +61,6 @@ export default function HomeScreen() {
 
   // scroll end?
   useEffect(() => {});
-  const renderNext = () => {
-    current++;
-    return (
-      <Card>
-        <CardItem header button onPress={() => {
-          // TODO: nav to item uid
-          alert("Accessing " + test_data[current].recipeName)
-        }}>
-          {/* <Image source={{uri: test_data[current].img}} style={styles.image} /> */}
-          <Text style={styles.title}>{test_data[current].recipeName+ ': '}</Text>
-          <Text>{test_data[current].description}</Text>
-        </CardItem>
-      </Card>
-    )
-  }
   return (
     <Container>
     <Header searchBar>
@@ -69,7 +70,7 @@ export default function HomeScreen() {
       </Item>
     </Header>
     <Content padder>
-      {renderNext()}
+      {renderNext(test_data)}
     </Content>
     </Container>
   );
