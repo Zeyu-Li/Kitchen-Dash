@@ -16,49 +16,19 @@ import { firebase, db } from "../../../src/firebase/config.js";
 import { Image, View, StyleSheet, TextInput } from "react-native";
 import { styles } from "./styles.js";
 
-<<<<<<< Updated upstream
-const test_data = [
-  {
-    name: "Celery",
-    img: "https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_1280.jpg",
-    description: "Very very crunchy",
-    ingredients: { name: { mg: 5 } },
-    instructions: ["Add water", " put in soil", "grow"],
-    rating: 3,
-  },
-  {
-    name: "Frog",
-    img: "https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_1280.jpg",
-    description: "Very very crunchy",
-    ingredients: { name: { mg: 5 } },
-    instructions: ["Add water", " put in soil", "grow"],
-    rating: 3,
-  },
-  {
-    name: "Celery",
-    img: "https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_1280.jpg",
-    description: "Very very crunchy",
-    ingredients: { name: { mg: 5 } },
-    instructions: ["Add water", " put in soil", "grow"],
-    rating: 3,
-  },
-];
-=======
->>>>>>> Stashed changes
 
 export default function HomeScreen() {
   // search
-  const [ready, readyChange] = useState(false);
+  // const [ready, readyChange] = useState(false);
   const [search, searchOnChange] = useState("");
   const [items, changeItem] = useState([]);
-  let all_items;
+  const [searchfood, SetSearch] = useState([])
   const RecCol = db
     .collection("Recipe")
     .get()
     .then(function (querySnapshot) {
       const data = querySnapshot.docs.map((doc) => doc.data());
-      all_items = data;
-      changeItem(all_items);
+      changeItem(data);
     });
   let current = -1;
   const renderNext = (data) => {
@@ -131,10 +101,10 @@ export default function HomeScreen() {
     //     // console.log(doc);
     //   });
     // x;
-    if (search == '') {
-      changeItem(all_items);
+    if (search === '') {
+      SetSearch(items);
     } else {
-      changeItem(all_items.filter((item)=>{
+      SetSearch(items.filter((item)=>{
           return item.name.includes(search)
         })
       )
