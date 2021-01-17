@@ -49,7 +49,10 @@ function SettingsHome({ navigation }) {
         />
       </View>
       <View style={styles.button}>
-        <Button color="#FE7878" title="Logout" />
+        <Button color="#FE7878" title="Logout" 
+        onPress={() => {
+          navigation.navigate("Login");}}
+        />
       </View>
     </Center>
   );
