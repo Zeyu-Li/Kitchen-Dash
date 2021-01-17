@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Button, Text, View, Image } from "react-native";
 import { Center } from "../Center";
+import Helper from "./../Screens/Conversions/Helper"
 
 import {styles} from './styles.js';
 
