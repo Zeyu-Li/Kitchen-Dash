@@ -1,40 +1,34 @@
-import React from "react";
-import AppLoading from "expo-app-loading";
+import React, { Component, useState} from "react";
 import {
-  Container,
-  Header,
-  Label,
-  Title,
-  Form,
-  Item,
-  Input,
-  Content,
-  Footer,
-  FooterTab,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon,
-  TouchableOpacity,
+  ScrolView,
+  View,
+  StyleSheet,
+  TextInput,
   Text,
-  Roboto,
-} from "native-base";
+  TouchableOpacity,
+} from "react-native";
+import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { db } from "../../../src/firebase/config.js";
-import firestore from "@react-native-firebase/firestore";
+import * as firebase from "firebase";
+import "@firebase/auth";
+import "@firebase/firestore";
 
 const userDoc = db.collection("Users");
 const signUpUser = (email, password) => {
   try {
+    console.log(email,password);
     if (password.length < 6) {
       alert("please enter atleast 6 characters");
       return;
     }
-    firebase.auth().createUserWithEmailAndPassword(email, password);
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(() =>       userDoc.add({
+      email: email,
+    }));
   } catch (error) {
     console.log(error.toString());
   }
@@ -46,35 +40,16 @@ const loginUser = (email, password, navigation) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => navigation.navigate("Home"))
-      .then(
-        userDoc.add({
-          email: email,
-        })
-      );
   } catch (error) {
     console.log(error.toString());
   }
 };
 
-const Login = ({ navigation }) => {
-  const [isReady, setReady] = useState(false);
+ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    (async () => {
-      await Font.loadAsync({
-        Roboto: require("native-base/Fonts/Roboto.ttf"),
-        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-        ...Ionicons.font,
-      });
-      setReady(true);
-    })();
-  }, []);
 
-  if (!isReady) {
-    return <AppLoading />;
-  }
 
   return (
     <View style={styles.container}>
@@ -93,7 +68,7 @@ const Login = ({ navigation }) => {
           style={styles.inputText}
           placeholder="Password..."
           placeholderTextColor="#003f5c"
-          onChangeText={(text) => setPassword(password)}
+          onChangeText={(text) => setPassword(text)}
         />
       </View>
       <TouchableOpacity>
@@ -111,8 +86,6 @@ const Login = ({ navigation }) => {
     </View>
   );
 };
-
-export default Login;
 
 const styles = StyleSheet.create({
   container: {

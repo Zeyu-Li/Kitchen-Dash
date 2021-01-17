@@ -10,12 +10,24 @@ import { Settings } from "./tabs/Settings";
 import HomeScreen from "../src/Screens/Home/HomeScreen.js";
 import FavScreen from "../src/Screens/Favourites/FavScreen.js";
 import Add from "../src/Screens/Add/AddScreen.js";
-
+import Login from '../src/Screens/Login/LoginScreen'
 const Tab = createBottomTabNavigator();
+const RootStack = createStackNavigator();
 
-export const Routes = ({}) => {
-  return (
+export default function Routes () {
+  return(
     <NavigationContainer>
+      <RootStack.Navigator initialRouteName="Login">
+        <RootStack.Screen name = "Login" component={Login} />          
+        <RootStack.Screen name = "Home" component={tabNav} />
+      </RootStack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+
+const tabNav = ({}) => {
+  return (
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
@@ -67,6 +79,5 @@ export const Routes = ({}) => {
         <Tab.Screen name="Favourites" component={FavScreen} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 };
