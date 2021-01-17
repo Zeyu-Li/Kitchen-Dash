@@ -1,24 +1,16 @@
 import React, { Component, useState} from "react";
 import {
   View,
-  StyleSheet,
   TextInput,
   Text,
   TouchableOpacity,
   Image,
   Alert,
 } from "react-native";
-import AppLoading from "expo-app-loading";
-import * as Font from "expo-font";
-import { Ionicons } from "@expo/vector-icons";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
 import { db } from "../../../src/firebase/config.js";
 import * as firebase from "firebase";
 import "@firebase/auth";
 import "@firebase/firestore";
-
 import { styles } from "./styles.js";
 
 const userDoc = db.collection("Users");

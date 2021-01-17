@@ -16,6 +16,7 @@ import { firebase, db } from "../../../src/firebase/config.js";
 import { Image, View, StyleSheet, TextInput } from "react-native";
 import { styles } from "./styles.js";
 
+<<<<<<< Updated upstream
 const test_data = [
   {
     name: "Celery",
@@ -42,6 +43,8 @@ const test_data = [
     rating: 3,
   },
 ];
+=======
+>>>>>>> Stashed changes
 
 export default function HomeScreen() {
   // search

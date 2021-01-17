@@ -36,8 +36,9 @@ export default function Add() {
       desc: Description,
       ingredients: ingredients,
       instruc: Instructions,
-      img: "https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_1280.jpg",
-      rating: 3
+      img:
+        "https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_1280.jpg",
+      rating: 3,
     };
     RecCol.add(data);
     setQuantity(0);
@@ -72,7 +73,7 @@ export default function Add() {
     setIngredient("");
     setUnit("");
   };
-  // col.add({name: "Afaq Nabi" , address: "102"});
+
   return (
     // Form
     <View style={styles.formContainer}>
@@ -97,7 +98,9 @@ export default function Add() {
         <DropDownPicker
           items={[
             { label: "lbs", value: "item1" },
-            { label: "Tablespoon", value: "item2" },
+            { label: "tbsp", value: "item2" },
+            { label: "cup", value: "item3" },
+            { label: "tsp", value: "item4" },
           ]}
           defaultNull
           placeholder="Units"

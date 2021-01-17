@@ -3,13 +3,13 @@ import "@firebase/auth";
 import "@firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBbbdNwXhLKaDlmQIxoj6Rdx73wQiBPUuA",
-  authDomain: "kitchen-dash-aa6d0.firebaseapp.com",
-  projectId: "kitchen-dash-aa6d0",
-  storageBucket: "kitchen-dash-aa6d0.appspot.com",
-  messagingSenderId: "658044614185",
-  appId: "1:658044614185:web:37b08c9f826f86a25f0e38",
-  measurementId: "G-815CWVP49X",
+  apiKey: "AIzaSyA0oWk71A-urAa8x6xeTb7CY4KUOEVr_pk",
+  authDomain: "kitchen-dash2.firebaseapp.com",
+  projectId: "kitchen-dash2",
+  storageBucket: "kitchen-dash2.appspot.com",
+  messagingSenderId: "153120476509",
+  appId: "1:153120476509:web:3f23bc3fca0b6292f36cb4",
+  measurementId: "G-LW71M69PTW",
 };
 
 if (!firebase.apps.length) {
@@ -17,4 +17,3 @@ if (!firebase.apps.length) {
 }
 const db = firebase.firestore();
 export { firebase, db };
-
