@@ -16,13 +16,12 @@ import { firebase, db } from "../../../src/firebase/config.js";
 import { Image, View, StyleSheet, TextInput } from "react-native";
 import { styles } from "./styles.js";
 
-
 export default function HomeScreen() {
   // search
   // const [ready, readyChange] = useState(false);
   const [search, searchOnChange] = useState("");
   const [items, changeItem] = useState([]);
-  const [searchfood, SetSearch] = useState([])
+  const [searchfood, SetSearch] = useState([]);
   const RecCol = db
     .collection("Recipe")
     .get()
@@ -63,6 +62,16 @@ export default function HomeScreen() {
           }}
         >
           <Text style={styles.title}>{data.name + ": "}</Text>
+        </CardItem>
+
+        <CardItem
+          header
+          button
+          onPress={() => {
+            // TODO: nav to item uid
+            alert("Accessing " + data.name);
+          }}
+        >
           <Text>{data.desc}</Text>
         </CardItem>
         <CardItem>
@@ -101,13 +110,14 @@ export default function HomeScreen() {
     //     // console.log(doc);
     //   });
     // x;
-    if (search === '') {
+    if (search === "") {
       SetSearch(items);
     } else {
-      SetSearch(items.filter((item)=>{
-          return item.name.includes(search)
+      SetSearch(
+        items.filter((item) => {
+          return item.name.includes(search);
         })
-      )
+      );
       // console.log(items)
     }
     console.log(search);
