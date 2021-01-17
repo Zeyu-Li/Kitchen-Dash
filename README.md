@@ -1,6 +1,6 @@
 # Kitchen Dash
 
-<img src="img/logo.png" alt="logo" style="width: 300px;text-align:center;" />
+<img src="img/logo.png" alt="logo" style="text-align:center;"  width="200" height="200"  />
 
 Kitchen Dash will help you share your recipes with the work and view user created content! Browse through a curated collection of user created recipes with instructions, ingredients, ratings
 
