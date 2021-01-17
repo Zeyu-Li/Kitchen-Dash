@@ -47,13 +47,15 @@ export default function HomeScreen() {
   // search
   const [ready, readyChange] = useState(false);
   const [search, searchOnChange] = useState("");
-  const [items, changeItem] = useState(test_data);
+  const [items, changeItem] = useState([]);
+  let all_items;
   const RecCol = db
     .collection("Recipe")
     .get()
     .then(function (querySnapshot) {
       const data = querySnapshot.docs.map((doc) => doc.data());
-      changeItem(data);
+      all_items = data;
+      changeItem(all_items);
     });
   let current = -1;
   const renderNext = (data) => {
@@ -127,13 +129,13 @@ export default function HomeScreen() {
     //   });
     // x;
     if (search == '') {
-      changeItem(test_data);
+      changeItem(all_items);
     } else {
-      changeItem(items.filter((item)=>{
+      changeItem(all_items.filter((item)=>{
           return item.name.includes(search)
         })
       )
-      console.log(items)
+      // console.log(items)
     }
     console.log(search);
   }, [search]);
