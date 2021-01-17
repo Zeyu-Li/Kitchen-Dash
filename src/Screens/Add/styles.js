@@ -32,12 +32,13 @@ export default StyleSheet.create({
     width: '100%',
   },
   inputInstruction: {
-    flex:1,
+    flex: 1,
     borderRadius: 5,
     backgroundColor: "white",
     padding: 10,
     margin: 5,
     width: '100%',
+    zIndex: -99999
   },
   ingredientContainer: {
     flexDirection: 'row',
@@ -52,7 +53,7 @@ export default StyleSheet.create({
     padding: 5,
     marginRight: 5,
     backgroundColor: "white",
-    width:'10%',
+    width: '10%',
   },
   ingredientInput: {
     borderRadius: 5,
