@@ -65,7 +65,7 @@ export default function HomeScreen() {
     <Header searchBar>
       <Item>
         <Icon name="ios-search" />
-        <Input placeholder="Find yummy foods" />
+        <Input placeholder="Search Foods" />
       </Item>
     </Header>
     <Content padder>

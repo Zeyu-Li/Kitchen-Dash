@@ -1,25 +1,43 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Button, Text } from "react-native";
+import { Button, Text, View, Image } from "react-native";
 import { Center } from "../Center";
+
+import {styles} from './styles.js';
+
 const Stack = createStackNavigator();
+
+const user = {
+  name: "John Adams",
+  email: "JohnAdams@gmail.com",
+  img: "",
+}
 
 function SettingsHome({ navigation }) {
   return (
     <Center>
-      <Button
-        title="Account Details"
+      {/* <View  style={styles.button}>
+      <Button 
+        title="Account Details" sty
         onPress={() => {
           navigation.navigate("Account Details");
-        }}
-      />
-      <Button
+        }} 
+      /></View> */}
+      {/* profile pic */}
+      { user.img.length === 0 ? <Image style={styles.img} source={require('@expo/../../img/none.png') } /> : <Image style={styles.img} source={require('@expo/../../img/none.png')} /> }
+      {/* Name */}
+      <Text style={styles.button, styles.bold}>{user.name}</Text>
+      {/* Email: */}
+      <Text style={styles.button}>{user.email}</Text>
+      <View  style={styles.button}>
+      <Button 
         title="Edit Account"
         onPress={() => {
           navigation.navigate("Account Details");
         }}
-      />
-      <Button title="Logout" />
+      /></View>
+      <View style={styles.button}>
+      <Button color="#FE7878" title="Logout" /></View>
     </Center>
   );
 }
@@ -27,8 +45,8 @@ function SettingsHome({ navigation }) {
 function AccountDetails() {
   return (
     <Center>
-      <Text>Name: John Smith</Text>
-      <Text>Email: JohnSmith@gmail.com </Text>
+      <Text>Name: {user.name}</Text>
+      <Text>Email: {user.email} </Text>
     </Center>
   );
 }
@@ -44,8 +62,8 @@ function EditAccount() {
 
 export function Settings() {
   return (
-    <Stack.Navigator initialRouteName="Settings Home">
-      <Stack.Screen name="Settings Home" component={SettingsHome} />
+    <Stack.Navigator initialRouteName="Settings">
+      <Stack.Screen name="Settings" component={SettingsHome} />
       <Stack.Screen name="Account Details" component={AccountDetails} />
       <Stack.Screen name="Edit Account" component={EditAccount} />
     </Stack.Navigator>
