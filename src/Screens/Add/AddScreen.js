@@ -12,7 +12,7 @@ export default function Add() {
   const [RecipeName, SetRecipeName] = useState("");
   const [Description, SetDescription] = useState("");
   const [Instructions, SetInstruction] = useState("");
-  const ingredientList = [];
+  //const ingredientList = [];
 
   // add the object to firebase
   const onAddButtonPress = () => {
@@ -20,6 +20,30 @@ export default function Add() {
     RecCol.add(data);
   };
 
+  //list of ingredients so far to display using a stack
+
+  const [Quantity, setQuantity] = useState(0);
+  const [Ingredient, setIngredient] = useState('');
+  const [Unit, setUnit] = useState(0);
+  const [ingredientList, setIngredientList] = useState([]);
+  // quantity setter
+  const quantityInputHandler = (enteredText) => {
+    setQuantity(enteredText);
+  }
+  // unit setter
+  const unitInputHandler = (enteredText) => {
+    setUnit(enteredText);
+  }
+  // ingredient setter
+  const ingredientInputHandler = (enteredText) => {
+    setIngredient(enteredText);
+  }
+
+  const addToIngredientList = () => {
+    setIngredientList(ingredientList => [...ingredientList, [Quantity, Ingredient]])
+    setQuantity(0)
+    setIngredient('')
+  }
   // col.add({name: "Afaq Nabi" , address: "102"});
   return (
     // Form
@@ -35,9 +59,15 @@ export default function Add() {
         placeholder="Brief Description"
         style={styles.inputDescription}
         onChangeText={(text) => SetDescription(text)}
+
       />
       <View style={styles.ingredientContainer}>
-        <TextInput placeholder="#" style={styles.ingredientCount} />
+        <TextInput
+          placeholder="#"
+          style={styles.ingredientCount}
+          onChangeText={quantityInputHandler}
+          value={Quantity}
+        />
         <DropDownPicker
           items={[
             { label: "lbs", value: "item1" },
@@ -49,11 +79,20 @@ export default function Add() {
           containerStyle={{ height: '100%', width: '25%' }}
           onChangeItem={(item) => console.log(item.label, item.value)}
         />
-        <TextInput placeholder="Ingredient" style={styles.ingredientInput} />
-        <Button title='+' style={{
-          width: 40,
-          height: '100%'
-        }} />
+        <TextInput
+          placeholder="Ingredient"
+          style={styles.ingredientInput}
+          onChangeText={ingredientInputHandler}
+          value={Ingredient}
+        />
+        <Button
+          title='+'
+          style={{ width: 40, height: '100%' }}
+          onPress={addToIngredientList}
+        />
+      </View>
+      <View>
+        {ingredientList.map((goal) => <Text>{goal[0] + ' ' + goal[1]}</Text>)}
       </View>
       <TextInput
         placeholder="Instructions"
