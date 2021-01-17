@@ -26,7 +26,18 @@ const signUpUser = (email, password) => {
   try {
     console.log(email,password);
     if (password.length < 6) {
-      alert("Please enter a password of at least 6 characters");
+      Alert.alert(
+        'Invalid',
+        "Please enter a password of at least 6 characters",
+        [
+          {
+            text: 'Ok',
+            onPress: () => console.log('Cancel'),
+            style: 'cancel'
+          }
+        ],
+        { cancelable: true }
+      );
       return;
     }
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -34,7 +45,18 @@ const signUpUser = (email, password) => {
       email: email,
     }));
   } catch (error) {
-    console.log(error.toString());
+    Alert.alert(
+      'Invalid',
+      error.toString(),
+      [
+        {
+          text: 'Ok',
+          onPress: () => console.log('Cancel'),
+          style: 'cancel'
+        }
+      ],
+      { cancelable: true }
+    );
   }
 };
 
@@ -45,7 +67,18 @@ const loginUser = (email, password, navigation) => {
       .signInWithEmailAndPassword(email, password)
       .then(() => navigation.navigate("Home"))
   } catch (error) {
-    console.log(error.toString());
+    Alert.alert(
+      'Password or username incorrect',
+      error.toString(),
+      [
+        {
+          text: 'Ok',
+          onPress: () => console.log('Cancel'),
+          style: 'cancel'
+        }
+      ],
+      { cancelable: true }
+    );
   }
 };
 
@@ -71,7 +104,8 @@ export default function LoginScreen({ navigation }) {
           onPress: () => console.log('Cancel'),
           style: 'cancel'
         }
-      ]
+      ],
+      { cancelable: true }
     )
     )
   }
