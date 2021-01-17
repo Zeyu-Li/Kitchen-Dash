@@ -16,34 +16,44 @@ export default function Add() {
 
   // add the object to firebase
   const onAddButtonPress = () => {
-    const data = { user:"afaq@yahoo.com",name: RecipeName, desc: Description, instruc: Instructions };
+    const data = { user: "afaq@yahoo.com", name: RecipeName, desc: Description, instruc: Instructions };
     RecCol.add(data);
   };
 
   // col.add({name: "Afaq Nabi" , address: "102"});
   return (
-    // Form 
+    // Form
     <View style={styles.formContainer}>
       <TextInput
-        placeholder="Give your recipe a Name"
-        style={styles.input}
+        placeholder="Give your recipe a name"
+        style={styles.inputTitle}
         onChangeText={(text) => SetRecipeName(text)}
       />
+
       <TextInput
-        placeholder="Breif Description"
-        style={styles.input}
+        multiline={true}
+        placeholder="Brief Description"
+        style={styles.inputDescription}
         onChangeText={(text) => SetDescription(text)}
       />
-      <DropDownPicker
-        items={[
-          { label: "lbs", value: "item1" },
-          { label: "Tablespoon", value: "item2" },
-        ]}
-        defaultNull
-        placeholder="Unit of measurment"
-        defaultIndex={1}
-        containerStyle={{ height: 40, width: 200 }}
-        onChangeItem={(item) => console.log(item.label, item.value)}
+      <View style={styles.ingredientContainer}>
+
+        <DropDownPicker
+          items={[
+            { label: "lbs", value: "item1" },
+            { label: "Tablespoon", value: "item2" },
+          ]}
+          defaultNull
+          placeholder="Units"
+          defaultIndex={1}
+          containerStyle={{ height: '100%', width: '30%' }}
+          onChangeItem={(item) => console.log(item.label, item.value)}
+        />
+        <TextInput placeholder="Ingredient" style={styles.ingredientInput} />
+      </View>
+      <TextInput
+        placeholder="Instructions"
+        style={styles.inputInstruction}
       />
       <Container>
         <Content padder>

@@ -1,13 +1,10 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-  },
+
   formContainer: {
     flexDirection: "column",
-    height: 80,
+    height: '100%',
     marginTop: 40,
     marginBottom: 20,
     flex: 1,
@@ -15,16 +12,47 @@ export default StyleSheet.create({
     paddingBottom: 10,
     paddingLeft: 30,
     paddingRight: 30,
-    justifyContent: "flex-start",
-    alignItems: "baseline",
+    alignItems: "center",
   },
-  input: {
-    height: 48,
+  inputTitle: {
+    height: '7%',
     borderRadius: 5,
     backgroundColor: "white",
-    paddingLeft: 16,
-    // flex: 1,
-    marginRight: 5,
+    paddingLeft: 10,
+    margin: 5,
+    width: '100%',
+  },
+  inputDescription: {
+    height: '15%',
+    borderRadius: 5,
+    backgroundColor: "white",
+    padding: 10,
+    paddingTop: 10,
+    margin: 5,
+    width: '100%',
+  },
+  inputInstruction: {
+    height: '7%',
+    borderRadius: 5,
+    backgroundColor: "white",
+    padding: 10,
+    margin: 5,
+    width: '100%',
+  },
+  ingredientContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    height: 40,
+    margin: 0,
+    padding: 0,
+    width: '100%',
+  },
+  ingredientInput: {
+    borderRadius: 5,
+    padding: 5,
+    marginLeft: 5,
+    backgroundColor: "white",
+    flex: 1,
   },
   button: {
     height: 47,
@@ -33,23 +61,5 @@ export default StyleSheet.create({
     width: 100,
     alignItems: "center",
     justifyContent: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-  },
-  listContainer: {
-    marginTop: 20,
-    padding: 20,
-  },
-  entityContainer: {
-    marginTop: 16,
-    borderBottomColor: "#cccccc",
-    borderBottomWidth: 1,
-    paddingBottom: 16,
-  },
-  entityText: {
-    fontSize: 20,
-    color: "#333333",
   },
 });
