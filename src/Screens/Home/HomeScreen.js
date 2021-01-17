@@ -26,7 +26,7 @@ const test_data = [
     rating: 3,
   },
   {
-    name: "Celery",
+    name: "Frog",
     img: "https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_1280.jpg",
     description: "Very very crunchy",
     ingredients: { name: { mg: 5 } },
@@ -47,7 +47,7 @@ export default function HomeScreen() {
   // search
   const [ready, readyChange] = useState(false);
   const [search, searchOnChange] = useState("");
-  const [items, changeItem] = useState([]);
+  const [items, changeItem] = useState(test_data);
   const RecCol = db
     .collection("Recipe")
     .get()
@@ -126,6 +126,15 @@ export default function HomeScreen() {
     //     // console.log(doc);
     //   });
     // x;
+    if (search == '') {
+      changeItem(test_data);
+    } else {
+      changeItem(items.filter((item)=>{
+          return item.name.includes(search)
+        })
+      )
+      console.log(items)
+    }
     console.log(search);
   }, [search]);
   return (
