@@ -38,121 +38,112 @@ const signUpUser = (email, password) => {
   }
 };
 
-const loginUser = (email, password, navigation) => {
-  console.log(email);
-  try {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((response) => {
-        const uid = response.user.uid;
-        const usersRef = firebase.firestore().collection("Users");
-        usersRef
-          .doc(uid)
-          .get()
-          .then((firestoreDocument) => {
-            if (!firestoreDocument.exists) {
-              alert("User does not exist anymore.");
-              return;
-            }
-            const user = firestoreDocument.data();
-            navigation.navigate("Home", { user });
-          })
-          .catch((error) => {
-            alert(error);
-          });
+const loginUser = (email, password,navigation) => {
+  console.log(email)
+  try{
+    firebase.auth().signInWithEmailAndPassword(email, password).then(() => navigation.navigate('App'))// Look at this Ben!!!! this is where I want to connect to home
+    .then(
+      userDoc.add({
+        email: email
       })
-      .catch((error) => {
-        alert(error);
-      });
-  } catch (error) {
-    console.log(error.toString());
+
+    )
   }
-};
+  catch(error){
+    console.log(error.toString())
+  }
+}
 
 const Login = ({ navigation }) => {
-  const [isReady, setReady] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [isReady, setReady] =  useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    (async () => {
-      await Font.loadAsync({
-        Roboto: require("native-base/Fonts/Roboto.ttf"),
-        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
-        ...Ionicons.font,
-      });
-      setReady(true);
-    })();
-  }, []);
 
-  if (!isReady) {
-    return <AppLoading />;
-  }
 
-  return (
-    <Container>
-      {/* <Header>
-        <Left>
-          <Button transparent>
-            <Icon name="menu" />
-          </Button>
-        </Left>
-        <Body>
-          <Title>Calorie Calculator</Title>
-        </Body>
-        <Right />
-      </Header> */}
-      <Content>
-        <Form>
-          <Item floatingLabel>
+useEffect(() => {
+(async () =>{
+await Font.loadAsync({
+Roboto: require('native-base/Fonts/Roboto.ttf'),
+Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+...Ionicons.font,
+});
+setReady(true);
+})()
+}, [])
+
+
+if (!isReady) {
+  return <AppLoading />;
+}
+
+return (
+  <Container>
+  <Header>
+    <Left>
+      <Button transparent>
+        <Icon name='menu' />
+      </Button>
+    </Left>
+    <Body>
+      <Title>Calorie Calculator</Title>
+    </Body>
+    <Right />
+  </Header>
+  <Content>
+    <Form>
+        <Item floatingLabel>
             <Label>Email</Label>
             <Input
-              autoCorrect={false}
-              autoCapitalize="none"
-              onChangeText={(email) => setEmail(email)}
-            />
-          </Item>
+            autoCorrect={false}
+            autoCapitalize="none"
+            onChangeText={email => setEmail(email)}
 
-          <Item floatingLabel>
+            />
+        </Item>
+
+        <Item floatingLabel>
             <Label>Password</Label>
             <Input
-              secureTextEntry={true}
-              autoCorrect={false}
-              autoCapitalize="none"
-              onChangeText={(password) => setPassword(password)}
-            />
-          </Item>
+            secureTextEntry={true}
+            autoCorrect={false}
+            autoCapitalize="none"
+            onChangeText= {password => setPassword(password)}
 
-          <Button
-            style={{ marginTop: 10 }}
+            />
+        </Item>
+
+        <Button style={{marginTop: 10}}
             full
             rounded
             success
-            onPress={() => loginUser(email, password, navigation)}
-          >
-            <Text> Login</Text>
-          </Button>
+            onPress= {() => loginUser(email, password, navigation)}
 
-          <Button
-            style={{ marginTop: 10 }}
+        >
+            <Text> Login</Text>
+        </Button>
+
+        <Button style={{marginTop: 10}}
             full
             rounded
             primary
-            onPress={() => signUpUser(email, password)}
-          >
-            <Text style={{ color: "white" }}> Sign up</Text>
-          </Button>
+            onPress= {() => signUpUser(email, password)}
+
+        >
+            <Text style={{color: "white"}}> Sign up</Text>
+        </Button>
+
         </Form>
-      </Content>
-      <Footer>
-        <FooterTab>
-          <Button full>
-            <Text>food-o-meter 2021™</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
-    </Container>
-  );
-};
+
+  </Content>
+  <Footer>
+    <FooterTab>
+      <Button full>
+        <Text>food-o-meter 2021™</Text>
+      </Button>
+    </FooterTab>
+  </Footer>
+</Container>
+);
+}
 export default Login;

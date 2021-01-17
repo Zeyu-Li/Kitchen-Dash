@@ -19,13 +19,13 @@ export const Routes = ({}) => {
           let iconName;
           // console.log(focused)
 
-          if (route.name === "Home") {
-            return <Image source={home} style={{ width: 30, height: 30 }} />;
-          } else if (route.name === "Settings") {
-            return <Image source={setting} style={{ width: 30, height: 30 }} />;
-          } else if (route.name === "Favourites") {
-            return <Image source={star} style={{ width: 30, height: 30 }} />;
-          }
+          // if (route.name === "Home") {
+          //   return <Image source={home} style={{ width: 30, height: 30 }} />;
+          // } else if (route.name === "Settings") {
+          //   return <Image source={setting} style={{ width: 30, height: 30 }} />;
+          // } else if (route.name === "Favourites") {
+          //   return <Image source={star} style={{ width: 30, height: 30 }} />;
+          // }
 
           // You can return any component that you like here!
           // return <Ionicons name={iconName} size={size} color={color} />;
