@@ -37,7 +37,7 @@ export default function Add() {
         onChangeText={(text) => SetDescription(text)}
       />
       <View style={styles.ingredientContainer}>
-
+        <TextInput placeholder="#" style={styles.ingredientCount} />
         <DropDownPicker
           items={[
             { label: "lbs", value: "item1" },
@@ -46,27 +46,21 @@ export default function Add() {
           defaultNull
           placeholder="Units"
           defaultIndex={1}
-          containerStyle={{ height: '100%', width: '30%' }}
+          containerStyle={{ height: '100%', width: '25%' }}
           onChangeItem={(item) => console.log(item.label, item.value)}
         />
         <TextInput placeholder="Ingredient" style={styles.ingredientInput} />
+        <Button title='+' style={{
+          width: 40,
+          height: '100%'
+        }} />
       </View>
       <TextInput
         placeholder="Instructions"
+        multiline={true}
         style={styles.inputInstruction}
       />
-      <Container>
-        <Content padder>
-          <Form>
-            <Textarea
-              rowSpan={5}
-              bordered
-              placeholder="Write Instructions"
-              onChangeText={(text) => SetInstruction(text)}
-            />
-          </Form>
-        </Content>
-      </Container>
+
       <View>
         <Button
           title="Add"
