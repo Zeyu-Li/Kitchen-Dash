@@ -17,7 +17,11 @@ const RootStack = createStackNavigator();
 export default function Routes () {
   return(
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Login">
+      <RootStack.Navigator initialRouteName="Login"
+      
+        screenOptions={{
+          headerShown: false
+        }}>
         <RootStack.Screen name = "Login" component={Login} />          
         <RootStack.Screen name = "Home" component={tabNav} />
       </RootStack.Navigator>

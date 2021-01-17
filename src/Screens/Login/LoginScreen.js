@@ -1,28 +1,32 @@
 import React, { Component, useState} from "react";
 import {
-  ScrolView,
   View,
   StyleSheet,
   TextInput,
   Text,
   TouchableOpacity,
+  Image,
+  Alert,
 } from "react-native";
 import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import { db } from "../../../src/firebase/config.js";
 import * as firebase from "firebase";
 import "@firebase/auth";
 import "@firebase/firestore";
+
+import { styles } from "./styles.js";
 
 const userDoc = db.collection("Users");
 const signUpUser = (email, password) => {
   try {
     console.log(email,password);
     if (password.length < 6) {
-      alert("please enter atleast 6 characters");
+      alert("Please enter a password of at least 6 characters");
       return;
     }
     firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -45,19 +49,40 @@ const loginUser = (email, password, navigation) => {
   }
 };
 
- export default function LoginScreen({ navigation }) {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-
+  // custum alerts
+  const alerter = () => {
+    return (Alert.alert(
+      'Password Reset',
+      'Confirm password reset',
+      [
+        {
+          text: 'Reset Password',
+          onPress: () => {
+            // reset password
+            console.log('Reset Password')
+          }
+        },
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel'),
+          style: 'cancel'
+        }
+      ]
+    )
+    )
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>HeyAPP</Text>
+      <Image style={styles.image} source={require(`@expo/../../img/logo.png`)} />
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
-          placeholder="Email..."
+          placeholder="Email"
           placeholderTextColor="#003f5c"
           onChangeText={(text) => setEmail(text)}
         />
@@ -66,12 +91,15 @@ const loginUser = (email, password, navigation) => {
         <TextInput
           secureTextEntry
           style={styles.inputText}
-          placeholder="Password..."
+          placeholder="Password"
           placeholderTextColor="#003f5c"
           onChangeText={(text) => setPassword(text)}
         />
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => {alerter()}
+      }
+      >
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -81,53 +109,8 @@ const loginUser = (email, password, navigation) => {
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => signUpUser(email, password)}>
-        <Text style={styles.loginText}>Signup</Text>
+        <Text style={styles.signUp}>Signup</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#003f5c",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  logo: {
-    fontWeight: "bold",
-    fontSize: 50,
-    color: "#fb5b5a",
-    marginBottom: 40,
-  },
-  inputView: {
-    width: "80%",
-    backgroundColor: "#465881",
-    borderRadius: 25,
-    height: 50,
-    marginBottom: 20,
-    justifyContent: "center",
-    padding: 20,
-  },
-  inputText: {
-    height: 50,
-    color: "white",
-  },
-  forgot: {
-    color: "white",
-    fontSize: 11,
-  },
-  loginBtn: {
-    width: "80%",
-    backgroundColor: "#fb5b5a",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    marginBottom: 10,
-  },
-  loginText: {
-    color: "white",
-  },
-});
