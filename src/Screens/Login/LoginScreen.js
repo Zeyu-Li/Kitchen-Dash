@@ -22,6 +22,21 @@ import "@firebase/firestore";
 import { styles } from "./styles.js";
 
 const userDoc = db.collection("Users");
+const success = () => {
+  
+  Alert.alert(
+    'Success',
+    "Account created!",
+    [
+      {
+        text: 'Ok',
+        onPress: () => console.log('Cancel'),
+        style: 'cancel'
+      }
+    ],
+    { cancelable: true }
+  )
+}
 const signUpUser = (email, password) => {
   // strip email
   email = email.trim();
@@ -45,7 +60,7 @@ const signUpUser = (email, password) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .then(() =>       userDoc.add({
       email: email,
-    }));
+    })).then(() => success());
   } catch (error) {
     Alert.alert(
       'Invalid',
