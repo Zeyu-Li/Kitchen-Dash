@@ -11,7 +11,8 @@ const test_data = [{
   img: 'https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_1280.jpg',
   description: "Very very crunchy",
   ingredients:{"name":{"mg": 5}},
-  instructions:["Add water", " put in soil", "grow"]
+  instructions:["Add water", " put in soil", "grow"],
+  rating: 3,
 }]
 
 export default function HomeScreen() {
@@ -37,15 +38,33 @@ export default function HomeScreen() {
   let result = 3
   const renderNext = (test_data) => {
     current++;
+    let stars = [];
+    let i;
+    for (i = 0; i< test_data[current].rating; i++) {
+      stars.push(1);
+    }
+    for (i = test_data[current].rating; i< 5; i++) {
+      stars.push(0);
+    }
     return (
       <Card>
         <CardItem header button onPress={() => {
           // TODO: nav to item uid
-          alert("Accessing " + test_data[current].recipeName)
+          alert("Accessing " + stars)
+          // alert("Accessing " + test_data[current].recipeName)
         }}>
           <Image source={{uri: test_data[current].img}} style={styles.image} />
+        </CardItem>
+        <CardItem header button onPress={() => {
+          // TODO: nav to item uid
+          alert("Accessing " + test_data[current].recipeName)
+        }}>
           <Text style={styles.title}>{test_data[current].recipeName+ ': '}</Text>
           <Text>{test_data[current].description}</Text>
+        </CardItem>
+        <CardItem>
+          {/* <Image style={styles.star} source={require('@expo/../../img/star_full.png')} /> */}
+          {stars.map((stater) => <Image style={styles.star} source={stater ? require(`@expo/../../img/star_full.png`) : require(`@expo/../../img/star_empty.png`)}/>)}
         </CardItem>
       </Card>
     )
