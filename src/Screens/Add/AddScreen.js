@@ -1,7 +1,6 @@
 import React, { Component, useState, TouchableOpacity } from "react";
-import { Container, Content, Form, Textarea, Button } from "native-base";
 import { db } from "../../../src/firebase/config.js";
-import { ScrolView, View, StyleSheet, TextInput, Text } from "react-native";
+import { ScrolView, View, StyleSheet, TextInput, Text, Button } from "react-native";
 import styles from "./styles.js";
 import DropDownPicker from "react-native-dropdown-picker";
 
@@ -9,39 +8,34 @@ export default function Add() {
   const RecCol = db.collection("Recipe"); // ref to the collection in firbase
 
   // hooks to build the object to be stored
+
   const [RecipeName, SetRecipeName] = useState("");
   const [Description, SetDescription] = useState("");
-  const [Instructions, SetInstruction] = useState("");
-  //const ingredientList = [];
-
-  // add the object to firebase
-  const onAddButtonPress = () => {
-    let ingredients = []
-    for (let i = 0; i < ingredientList.length; i++)
-    {
-      ingredients.push(ingredientList[i].join(' '))
-    }
-    const data = { user: "afaq@yahoo.com", name: RecipeName, desc: Description, ingredients: ingredients, instruc: Instructions };
-    RecCol.add(data);
-    setQuantity(0)
-    setIngredient('')
-    SetInstruction('')
-    setUnit('')
-    setIngredientList([])
-  };
-
-  //list of ingredients so far to display using a stack
-
+  const [Instructions, setInstruction] = useState("");
   const [Quantity, setQuantity] = useState(0);
   const [Ingredient, setIngredient] = useState('');
   const [Unit, setUnit] = useState('');
   const [ingredientList, setIngredientList] = useState([]);
+
+  // add the object to firebase
+  const onAddButtonPress = () => {
+
+    let ingredients = ingredientList.reduce((acc, [q, i, key]) => Object.assign(acc, { [key]: [q, i] }), {})
+    const data = { user: "afaq@yahoo.com", name: RecipeName, desc: Description, ingredients: ingredients, instruc: Instructions };
+    RecCol.add(data);
+    setQuantity(0)
+    setIngredient('')
+    setInstruction('')
+    setUnit('')
+    setIngredientList([])
+  };
+
   // quantity setter
   const quantityInputHandler = (enteredText) => {
     setQuantity(enteredText);
   }
   const instructionInputHandler = (enteredText) => {
-    SetInstruction(enteredText);
+    setInstruction(enteredText);
   }
   // unit setter
   const unitInputHandler = (enteredText) => {
@@ -106,9 +100,7 @@ export default function Add() {
           onPress={addToIngredientList}
         />
       </View>
-      <View>
-        {ingredientList.map((goal) => <Text>{goal[0] + ' ' + goal[1] + ' ' + goal[2]}</Text>)}
-      </View>
+
       <TextInput
         placeholder="Instructions"
         multiline={true}
