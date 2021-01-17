@@ -2,9 +2,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Button, Text, View, Image } from "react-native";
 import { Center } from "../Center";
-import Helper from "./../Screens/Conversions/Helper"
+import Helper from "./../Screens/Conversions/Helper";
 
-import {styles} from './styles.js';
+import { styles } from "./styles.js";
 
 const Stack = createStackNavigator();
 
@@ -12,7 +12,7 @@ const user = {
   name: "John Adams",
   email: "JohnAdams@gmail.com",
   img: "",
-}
+};
 
 function SettingsHome({ navigation }) {
   return (
@@ -25,20 +25,32 @@ function SettingsHome({ navigation }) {
         }} 
       /></View> */}
       {/* profile pic */}
-      { user.img.length === 0 ? <Image style={styles.img} source={require('@expo/../../img/none.png') } /> : <Image style={styles.img} source={require('@expo/../../img/none.png')} /> }
+      {user.img.length === 0 ? (
+        <Image
+          style={styles.img}
+          source={require("@expo/../../img/none.png")}
+        />
+      ) : (
+        <Image
+          style={styles.img}
+          source={require("@expo/../../img/none.png")}
+        />
+      )}
       {/* Name */}
-      <Text style={styles.button, styles.bold}>{user.name}</Text>
+      <Text style={(styles.button, styles.bold)}>{user.name}</Text>
       {/* Email: */}
       <Text style={styles.button}>{user.email}</Text>
-      <View  style={styles.button}>
-      <Button 
-        title="Edit Account"
-        onPress={() => {
-          navigation.navigate("Account Details");
-        }}
-      /></View>
       <View style={styles.button}>
-      <Button color="#FE7878" title="Logout" /></View>
+        <Button
+          title="Edit Account"
+          onPress={() => {
+            navigation.navigate("Account Details");
+          }}
+        />
+      </View>
+      <View style={styles.button}>
+        <Button color="#FE7878" title="Logout" />
+      </View>
     </Center>
   );
 }
