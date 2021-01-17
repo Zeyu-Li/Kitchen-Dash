@@ -1,8 +1,13 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
-export default StyleSheet.create({
-    entityText: {
-        fontSize: 20,
-        color: '#333333'
+export const styles =  StyleSheet.create({
+    main: {
+        flex: 1, 
+        justifyContent: "center", 
+        alignItems: "center", 
+    },
+    text: {
+        
+        fontSize: 20, 
     }
 })

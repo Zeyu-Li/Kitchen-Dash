@@ -64,7 +64,7 @@ function EditAccount() {
 export function Settings() {
   return (
     <Stack.Navigator initialRouteName="Settings">
-      <Stack.Screen name="Settings" component={SettingsHome} />
+      <Stack.Screen name="⚙️ Settings" component={SettingsHome} />
       <Stack.Screen name="Account Details" component={AccountDetails} />
       <Stack.Screen name="Edit Account" component={EditAccount} />
     </Stack.Navigator>
