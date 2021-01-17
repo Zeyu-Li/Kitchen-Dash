@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 export const styles =  StyleSheet.create({
     entityText: {
@@ -9,7 +9,11 @@ export const styles =  StyleSheet.create({
         fontWeight: "bold",
     },
     image: {
+        width: Dimensions.get('window').width * .8,
         height: 200,
-        flex: 1,
+    },
+    star: {
+        width: 20,
+        height: 20,
     }
 })
