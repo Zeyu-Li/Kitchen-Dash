@@ -1,4 +1,6 @@
-# Kitchen Dash
+# Kitchen Dash 🍽️
+
+Share your recipes with your friends and with the world! Have a great time making cool user recipes and have fun eating! 
 
 Kitchen Dash for HackED 2021, a 24 hour hackathon! 
 
