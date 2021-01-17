@@ -16,6 +16,7 @@ import {
   Right,
   Body,
   Icon,
+  TouchableOpacity,
   Text,
   Roboto,
 } from "native-base";
@@ -25,7 +26,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {db} from "../../../src/firebase/config.js";
 import firestore from "@react-native-firebase/firestore";
-import Home from "../Home/Home";
 
 const userDoc = db.collection("Users");
 const signUpUser = (email, password) => {
@@ -77,69 +77,81 @@ const Login = ({ navigation }) => {
   }
 
   return (
-    <Container>
-      <Header>
-        <Left>
-          <Button transparent>
-            <Icon name="menu" />
-          </Button>
-        </Left>
-        <Body>
-          <Title>Calorie Calculator</Title>
-        </Body>
-        <Right />
-      </Header>
-      <Content>
-        <Form>
-          <Item floatingLabel>
-            <Label>Email</Label>
-            <Input
-              autoCorrect={false}
-              autoCapitalize="none"
-              onChangeText={(email) => setEmail(email)}
-            />
-          </Item>
+    <View style={styles.container}>
+    <Text style={styles.logo}>HeyAPP</Text>
+    <View style={styles.inputView} >
+      <TextInput  
+        style={styles.inputText}
+        placeholder="Email..." 
+        placeholderTextColor="#003f5c"
+        onChangeText={text => setEmail(text)}/>
+    </View>
+    <View style={styles.inputView} >
+      <TextInput  
+        secureTextEntry
+        style={styles.inputText}
+        placeholder="Password..." 
+        placeholderTextColor="#003f5c"
+        onChangeText={text => setPassword(password)}/>
+    </View>
+    <TouchableOpacity>
+      <Text style={styles.forgot}>Forgot Password?</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles.loginBtn} onPress= {() => loginUser(email, password, navigation)}>
+      <Text style={styles.loginText}>LOGIN</Text>
+    </TouchableOpacity>
+    <TouchableOpacity onPress= {() => signUpUser(email, password)}>
+      <Text style={styles.loginText}>Signup</Text>
+    </TouchableOpacity>
 
-          <Item floatingLabel>
-            <Label>Password</Label>
-            <Input
-              secureTextEntry={true}
-              autoCorrect={false}
-              autoCapitalize="none"
-              onChangeText={(password) => setPassword(password)}
-            />
-          </Item>
 
-          <Button
-            style={{ marginTop: 10 }}
-            full
-            rounded
-            success
-            onPress={() => loginUser(email, password, navigation)}
-          >
-            <Text> Login</Text>
-          </Button>
-
-          <Button
-            style={{ marginTop: 10 }}
-            full
-            rounded
-            primary
-            onPress={() => signUpUser(email, password)}
-          >
-            <Text style={{ color: "white" }}> Sign up</Text>
-          </Button>
-        </Form>
-      </Content>
-      <Footer>
-        <FooterTab>
-          <Button full>
-            <Text>food-o-meter 2021™</Text>
-          </Button>
-        </FooterTab>
-      </Footer>
-    </Container>
+  </View>
   );
 };
 
 export default Login;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#003f5c',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logo:{
+    fontWeight:"bold",
+    fontSize:50,
+    color:"#fb5b5a",
+    marginBottom:40
+  },
+  inputView:{
+    width:"80%",
+    backgroundColor:"#465881",
+    borderRadius:25,
+    height:50,
+    marginBottom:20,
+    justifyContent:"center",
+    padding:20
+  },
+  inputText:{
+    height:50,
+    color:"white"
+  },
+  forgot:{
+    color:"white",
+    fontSize:11
+  },
+  loginBtn:{
+    width:"80%",
+    backgroundColor:"#fb5b5a",
+    borderRadius:25,
+    height:50,
+    alignItems:"center",
+    justifyContent:"center",
+    marginTop:40,
+    marginBottom:10
+  },
+  loginText:{
+    color:"white"
+  }
+});
