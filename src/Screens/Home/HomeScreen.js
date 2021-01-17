@@ -50,8 +50,8 @@ export default function HomeScreen() {
       <Card>
         <CardItem header button onPress={() => {
           // TODO: nav to item uid
-          alert("Accessing " + stars)
-          // alert("Accessing " + test_data[current].recipeName)
+          // alert("Accessing " + stars)
+          alert("Accessing " + test_data[current].recipeName)
         }}>
           <Image source={{uri: test_data[current].img}} style={styles.image} />
         </CardItem>
