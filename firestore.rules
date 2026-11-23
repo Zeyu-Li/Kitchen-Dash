@@ -1,0 +1,26 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // Recipes are shared between signed-in users. A recipe can only be
+    // published under the author's own email, and never edited by others.
+    match /Recipe/{recipeId} {
+      allow read: if signedIn();
+      allow create: if signedIn()
+        && request.resource.data.user == request.auth.token.email;
+    }
+
+    // Written once at sign-up. Nobody can list or read other users' emails.
+    match /Users/{userId} {
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['email'])
+        && request.resource.data.email == request.auth.token.email;
+    }
+
+    // Everything else is closed by default.
+  }
+}

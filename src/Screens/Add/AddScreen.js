@@ -1,5 +1,6 @@
 import React, { Component, useState, TouchableOpacity } from "react";
-import { db } from "../../../src/firebase/config.js";
+import { auth, db } from "../../../src/firebase/config.js";
+import { collection, addDoc } from "firebase/firestore";
 import {
   ScrolView,
   View,
@@ -12,7 +13,7 @@ import styles from "./styles.js";
 import DropDownPicker from "react-native-dropdown-picker";
 
 export default function Add() {
-  const RecCol = db.collection("Recipe"); // ref to the collection in firbase
+  const RecCol = collection(db, "Recipe"); // ref to the collection in firbase
 
   // hooks to build the object to be stored
 
@@ -22,6 +23,7 @@ export default function Add() {
   const [Quantity, setQuantity] = useState(0);
   const [Ingredient, setIngredient] = useState("");
   const [Unit, setUnit] = useState("");
+  const [unitPickerOpen, setUnitPickerOpen] = useState(false);
   const [ingredientList, setIngredientList] = useState([]);
 
   // add the object to firebase
@@ -31,7 +33,7 @@ export default function Add() {
       {}
     );
     const data = {
-      user: "afaq@yahoo.com",
+      user: auth.currentUser.email,
       name: RecipeName,
       desc: Description,
       ingredients: ingredients,
@@ -40,7 +42,7 @@ export default function Add() {
         "https://cdn.pixabay.com/photo/2016/12/26/17/28/food-1932466_1280.jpg",
       rating: 3,
     };
-    RecCol.add(data);
+    addDoc(RecCol, data);
     setQuantity(0);
     setIngredient("");
     setInstruction("");
@@ -54,10 +56,6 @@ export default function Add() {
   };
   const instructionInputHandler = (enteredText) => {
     setInstruction(enteredText);
-  };
-  // unit setter
-  const unitInputHandler = (enteredText) => {
-    setUnit(enteredText.label);
   };
   // ingredient setter
   const ingredientInputHandler = (enteredText) => {
@@ -97,17 +95,17 @@ export default function Add() {
         />
         <DropDownPicker
           items={[
-            { label: "lbs", value: "item1" },
-            { label: "tbsp", value: "item2" },
-            { label: "cup", value: "item3" },
-            { label: "tsp", value: "item4" },
+            { label: "lbs", value: "lbs" },
+            { label: "tbsp", value: "tbsp" },
+            { label: "cup", value: "cup" },
+            { label: "tsp", value: "tsp" },
           ]}
-          defaultNull
           placeholder="Units"
-          defaultIndex={1}
           containerStyle={{ height: "100%", width: "25%" }}
-          onChangeItem={unitInputHandler}
+          open={unitPickerOpen}
+          setOpen={setUnitPickerOpen}
           value={Unit}
+          setValue={setUnit}
         />
 
         <TextInput

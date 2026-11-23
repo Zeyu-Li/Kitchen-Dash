@@ -4,38 +4,34 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject"
+    "web": "expo start --web"
   },
   "dependencies": {
-    "@paraboly/react-native-card": "^1.0.3",
-    "@react-native-community/masked-view": "0.1.10",
-    "@react-navigation/bottom-tabs": "^5.11.2",
-    "@react-navigation/drawer": "^5.11.4",
-    "@react-navigation/native": "^5.8.10",
-    "@react-navigation/stack": "^5.12.8",
+    "@expo/metro-runtime": "~58.0.17",
+    "@react-navigation/bottom-tabs": "^7.22.0",
+    "@react-navigation/native": "^7.5.2",
+    "@react-navigation/stack": "^7.12.2",
     "convert-units": "^2.3.4",
-    "expo": "~40.0.0",
-    "expo-app-loading": "^1.0.1",
-    "expo-data-forms": "^2.1.11",
-    "expo-status-bar": "~1.0.3",
-    "firebase": "^8.2.2",
-    "native-base": "^2.15.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
-    "react-native-adaptivecards": "^0.1.37",
-    "react-native-dropdown-picker": "^3.7.8",
-    "react-native-firebase": "^5.6.0",
-    "react-native-gesture-handler": "^1.9.0",
-    "react-native-reanimated": "~1.13.0",
-    "react-native-safe-area-context": "3.1.9",
-    "react-native-screens": "~2.15.0",
-    "react-native-svg": "^12.1.0",
-    "react-native-web": "~0.13.12"
+    "expo": "~58.0.26",
+    "expo-splash-screen": "~58.0.14",
+    "expo-status-bar": "~58.0.5",
+    "firebase": "^13.4.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-native": "0.88.1",
+    "react-native-dropdown-picker": "^5.4.6",
+    "react-native-gesture-handler": "~3.3.0",
+    "react-native-safe-area-context": "~5.11.1",
+    "react-native-screens": "~4.30.1",
+    "react-native-svg": "15.16.0",
+    "react-native-web": "~0.21.4"
   },
-  "devDependencies": {
-    "@babel/core": "~7.9.0"
+  "resolutions": {
+    "**/@expo/fingerprint/minimatch": "^11.0.9",
+    "**/@firebase/firestore/@grpc/grpc-js": "^1.14.7"
+  },
+  "engines": {
+    "node": ">=22.13.0"
   },
   "private": true
 }

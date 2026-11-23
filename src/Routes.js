@@ -36,6 +36,9 @@ const tabNav = ({}) => {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarActiveTintColor: "tomato",
+          tabBarInactiveTintColor: "gray",
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
@@ -74,10 +77,6 @@ const tabNav = ({}) => {
             // return <Image source={home} style={{ width: 30, height: 30 }} />;
           },
         })}
-        tabBarOptions={{
-          activeTintColor: "tomato",
-          inactiveTintColor: "gray",
-        }}
       >
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Add" component={Add} />
