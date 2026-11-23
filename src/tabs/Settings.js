@@ -1,6 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Button, Text, View, Image } from "react-native";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/config.js";
 import { Center } from "../Center";
 import Helper from "./../Screens/Conversions/Helper";
 
@@ -51,7 +53,8 @@ function SettingsHome({ navigation }) {
       <View style={styles.button}>
         <Button color="#FE7878" title="Logout" 
         onPress={() => {
-          navigation.navigate("Login");}}
+          signOut(auth);
+          navigation.popTo("Login");}}
         />
       </View>
     </Center>
@@ -78,7 +81,7 @@ function EditAccount() {
 
 export function Settings() {
   return (
-    <Stack.Navigator initialRouteName="Settings">
+    <Stack.Navigator initialRouteName="⚙️ Settings">
       <Stack.Screen name="⚙️ Settings" component={SettingsHome} />
       <Stack.Screen name="Account Details" component={AccountDetails} />
       <Stack.Screen name="Edit Account" component={EditAccount} />

@@ -1,19 +1,14 @@
 import React, { Component, useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../../src/firebase/config.js";
 import {
-  Container,
-  Header,
-  Content,
-  Card,
-  CardItem,
+  Image,
+  Pressable,
+  ScrollView,
   Text,
-  Body,
-  Item,
-  Icon,
-  Input,
-  AppRegistry,
-} from "native-base";
-import { firebase, db } from "../../../src/firebase/config.js";
-import { Image, View, StyleSheet, TextInput } from "react-native";
+  TextInput,
+  View,
+} from "react-native";
 import { styles } from "./styles.js";
 
 export default function HomeScreen() {
@@ -22,13 +17,13 @@ export default function HomeScreen() {
   const [search, searchOnChange] = useState("");
   const [items, changeItem] = useState([]);
   const [searchfood, SetSearch] = useState([]);
-  const RecCol = db
-    .collection("Recipe")
-    .get()
-    .then(function (querySnapshot) {
+  // load the recipes once; fetching in the render body re-ran the query on every re-render
+  useEffect(() => {
+    getDocs(collection(db, "Recipe")).then(function (querySnapshot) {
       const data = querySnapshot.docs.map((doc) => doc.data());
       changeItem(data);
     });
+  }, []);
   let current = -1;
   const renderNext = (data) => {
     current++;
@@ -41,10 +36,9 @@ export default function HomeScreen() {
       stars.push(0);
     }
     return (
-      <Card>
-        <CardItem
-          header
-          button
+      <View style={styles.card} key={current}>
+        <Pressable
+          style={styles.cardItem}
           onPress={() => {
             // TODO: nav to item uid
             // alert("Accessing " + stars)
@@ -52,32 +46,31 @@ export default function HomeScreen() {
           }}
         >
           <Image source={{ uri: data.img }} style={styles.image} />
-        </CardItem>
-        <CardItem
-          header
-          button
+        </Pressable>
+        <Pressable
+          style={styles.cardItem}
           onPress={() => {
             // TODO: nav to item uid
             alert("Accessing " + data.name);
           }}
         >
           <Text style={styles.title}>{data.name + ": "}</Text>
-        </CardItem>
+        </Pressable>
 
-        <CardItem
-          header
-          button
+        <Pressable
+          style={styles.cardItem}
           onPress={() => {
             // TODO: nav to item uid
             alert("Accessing " + data.name);
           }}
         >
           <Text>{data.desc}</Text>
-        </CardItem>
-        <CardItem>
+        </Pressable>
+        <View style={[styles.cardItem, styles.stars]}>
           {/* <Image style={styles.star} source={require('@expo/../../img/star_full.png')} /> */}
-          {stars.map((stater) => (
+          {stars.map((stater, index) => (
             <Image
+              key={index}
               style={styles.star}
               source={
                 stater
@@ -86,8 +79,8 @@ export default function HomeScreen() {
               }
             />
           ))}
-        </CardItem>
-      </Card>
+        </View>
+      </View>
     );
   };
 
@@ -123,18 +116,19 @@ export default function HomeScreen() {
     console.log(search);
   }, [search]);
   return (
-    <Container>
-      <Header searchBar>
-        <Item>
-          <Icon name="ios-search" />
-          <Input
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.searchItem}>
+          <Text style={styles.searchIcon}>🔍</Text>
+          <TextInput
+            style={styles.searchInput}
             placeholder="Search Foods"
             onChangeText={(text) => searchOnChange(text)}
             value={search}
           />
-        </Item>
-      </Header>
-      <Content padder>{renderAll()}</Content>
-    </Container>
+        </View>
+      </View>
+      <ScrollView contentContainerStyle={styles.content}>{renderAll()}</ScrollView>
+    </View>
   );
 }

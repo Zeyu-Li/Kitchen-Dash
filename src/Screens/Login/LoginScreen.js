@@ -7,13 +7,15 @@ import {
   Image,
   Alert,
 } from "react-native";
-import { db } from "../../../src/firebase/config.js";
-import * as firebase from "firebase";
-import "@firebase/auth";
-import "@firebase/firestore";
+import { auth, db } from "../../../src/firebase/config.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
 import { styles } from "./styles.js";
 
-const userDoc = db.collection("Users");
+const userDoc = collection(db, "Users");
 const success = () => {
   
   Alert.alert(
@@ -33,7 +35,6 @@ const signUpUser = (email, password) => {
   // strip email
   email = email.trim();
   try {
-    console.log(email,password);
     if (password.length < 6) {
       Alert.alert(
         'Invalid',
@@ -49,9 +50,9 @@ const signUpUser = (email, password) => {
       );
       return;
     }
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(() =>       userDoc.add({
-      email: email,
+    createUserWithEmailAndPassword(auth, email, password)
+    .then(({ user }) =>       addDoc(userDoc, {
+      email: user.email,
     })).then(() => success());
   } catch (error) {
     Alert.alert(
@@ -73,9 +74,7 @@ const loginUser = (email, password, navigation) => {
   // strip email
   email = email.trim();
   try {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then(() => navigation.navigate("Home"))
   } catch (error) {
     Alert.alert(
